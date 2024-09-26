@@ -46,7 +46,7 @@ const display = function(displayValue){
     calcDisplay.textContent += displayValue;
     }
 
-    return calcDisplay.textContent;
+    return parseInt(calcDisplay.textContent);
 }
 
 
@@ -65,10 +65,10 @@ numberButtons.forEach(number => {
     number.addEventListener("click",(e)=>{
         console.log(typeof(e.target.textContent));
         if(bValue){
-            b=parseInt(display(e.target.textContent)); 
+            b=display(e.target.textContent); 
         }
         else{
-            a=parseInt(display(e.target.textContent)); 
+            a=display(e.target.textContent); 
         }
     })
 });
