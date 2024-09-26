@@ -46,7 +46,7 @@ const display = function(displayValue){
     calcDisplay.textContent += displayValue;
     }
 
-    return displayValue;
+    return calcDisplay.textContent;
 }
 
 
@@ -56,6 +56,7 @@ let a=0;
 let b=0;
 let operator="";
 let newValue=false;
+let bValue=false;
 
 const calcDisplay=document.querySelector(".calculator__display");
 const numberButtons=document.querySelectorAll(".key--operand"); 
@@ -63,8 +64,12 @@ const numberButtons=document.querySelectorAll(".key--operand");
 numberButtons.forEach(number => {
     number.addEventListener("click",(e)=>{
         console.log(typeof(e.target.textContent));
-        display(e.target.textContent);
-
+        if(bValue){
+            b=parseInt(display(e.target.textContent)); 
+        }
+        else{
+            a=parseInt(display(e.target.textContent)); 
+        }
     })
 });
 
@@ -75,43 +80,48 @@ restButtons.forEach(btn => {
         const action=e.target.getAttribute("data-action");
         switch(action){
             case "add":
-                a=parseInt(calcDisplay.textContent);
+                // a=parseInt(calcDisplay.textContent);
                 if(a===0){
                     break;
                 }
                 operator=action;
                 newValue=true;
+                bValue=true;
                 break;
 
             case "subtract":
-                a=parseInt(calcDisplay.textContent);
+                // a=parseInt(calcDisplay.textContent);
                 if(a===0){
                     break;
                 }
                 operator=action;
                 newValue=true;
+                bValue=true;
                 break;
 
             case "multiply":
-                a=parseInt(calcDisplay.textContent);
+                // a=parseInt(calcDisplay.textContent);
                 if(a===0){
                     break;
                 }
                 operator=action;
                 newValue=true;
+                bValue=true;
                 break;
 
             case "divide":
-                a=parseInt(calcDisplay.textContent);
+                // a=parseInt(calcDisplay.textContent);
                 if(a===0){
                     break;
                 }
                 operator=action;
                 newValue=true;
+                bValue=true;
                 break;
 
             case "clear":
                 newValue=true;
+                bValue=false;
                 display("0");
                 a=0;
                 b=0;
@@ -124,11 +134,13 @@ restButtons.forEach(btn => {
                     break;
                 }
                 newValue=true;
-                b=parseInt(calcDisplay.textContent);
+                // b=parseInt(calcDisplay.textContent);
                 let result = operate(a,b,operator);
                 a=result;
                 b=0;
                 operator="";
+                bValue=false;
+                newValue=true;
                 break;
         }
     })
